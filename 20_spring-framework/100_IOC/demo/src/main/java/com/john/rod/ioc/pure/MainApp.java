@@ -1,7 +1,6 @@
 package com.john.rod.ioc.pure;
 
-import com.john.rod.ioc.Person;
-import org.springframework.beans.factory.BeanFactory;
+import com.john.rod.ioc.pojo.Person;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.Resource;

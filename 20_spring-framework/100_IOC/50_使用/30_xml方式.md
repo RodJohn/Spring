@@ -15,7 +15,7 @@
 
 # 定义
 
-<bean id="person"  name="ren" class="com.john.rod.ioc.Person" />
+<bean d="person"  name="ren" class="1com.john.rod.ioc.Person" />
 
 通过bean元素定义Bean,
 
@@ -32,7 +32,7 @@ class为类,如果没有定义id和name,则使用class的全限定名作为名�
 属性注入(setter方法注入)
 
 ```
-    <bean id="person" class="com.john.rod.ioc.Person" >
+    <bean id="person" class="1com.john.rod.ioc.Person" >
         <property name="name" value="lijun"/>
     </bean>
 ```
@@ -42,7 +42,7 @@ spring将调用name的setter方法进行赋值
 构造注入
 
 ```
-    <bean id="person" class="com.john.rod.ioc.Person" >
+    <bean id="person" class="1com.john.rod.ioc.Person" >
         <constructor-arg name="name" value="lijun"/>
     </bean>
 ```

@@ -1,6 +1,6 @@
 package com.john.rod.ioc.annotation;
 
-import com.john.rod.ioc.Person;
+import com.john.rod.ioc.pojo.Person;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MainApp {

@@ -1,7 +1,7 @@
 package com.john.rod.ioc.annotation;
 
 
-import com.john.rod.ioc.Person;
+import com.john.rod.ioc.pojo.Person;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;

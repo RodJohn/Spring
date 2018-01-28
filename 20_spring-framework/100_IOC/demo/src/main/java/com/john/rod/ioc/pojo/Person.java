@@ -1,4 +1,4 @@
-package com.john.rod.ioc;
+package com.john.rod.ioc.pojo;
 
 public class Person {
 
