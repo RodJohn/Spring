@@ -11,7 +11,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 @Component
-public class PetFactoryBean<T> implements FactoryBean<T>, InitializingBean {
+public class PetFactoryBean<T> implements FactoryBean
+        <T>, InitializingBean {
 
     private Class<T> theInterface;
 
