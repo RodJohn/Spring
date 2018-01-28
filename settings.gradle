@@ -1,2 +1,3 @@
 rootProject.name = 'spring'
-
+include '20_spring-framework:100_IOC:demo'
+findProject(':20_spring-framework:100_IOC:demo')?.name = 'demo'
