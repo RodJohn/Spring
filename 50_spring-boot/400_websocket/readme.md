@@ -80,7 +80,22 @@ WebSocket 为浏览器和服务器端提供了双工异步通信的功能
 
 # 参考
 
+spring 的处理
 
-http://blog.csdn.net/u012373815/article/details/54375195
+http://blog.csdn.net/u012373815/article/details/54380476
 
 https://spring.io/guides/gs/messaging-stomp-websocket/
+
+https://www.cnblogs.com/nevermorewang/p/7274217.html
+
+
+原生的标准
+
+http://zk-chs.iteye.com/blog/2285329
+
+
+# 结合制作 聊天
+
+
+http://blog.csdn.net/u012702547/article/details/53835453
+
