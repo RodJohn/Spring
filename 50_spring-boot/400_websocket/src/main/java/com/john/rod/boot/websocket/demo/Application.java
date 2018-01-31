@@ -1,22 +1,24 @@
-package com.john.rod.boot.websocket;
+package com.john.rod.boot.websocket.demo;
 
+import com.john.rod.boot.websocket.Message;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.springframework.boot.SpringApplication.run;
 
 @SpringBootApplication
-public class Application {
+@Controller
+public class Application  {
 
 
     public static void main(String[] args) {
         ConfigurableApplicationContext run = run(Application.class, args);
     }
-
 
     @MessageMapping("/welcome")
     //浏览器发送请求通过@messageMapping 映射/welcome 这个地址。
@@ -27,22 +29,11 @@ public class Application {
         return new Response("Welcome, " + message.getName() + "!");
     }
 
-
-
     @RequestMapping("/")
     public ModelAndView ws() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ws");
         return modelAndView;
-    }
-
-
-    public class Message {
-        private String name;
-
-        public String getName() {
-            return name;
-        }
     }
 
 

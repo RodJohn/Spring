@@ -1,34 +1,85 @@
 
+
+#  @SubscribeMapping
+
+## 原理
+   
+   当收到STOMP订阅消息的时候，@SubscribeMapping标记的方法将会触发
+   
+   其也是通过 AnnotationMethodMessageHandler 来接收消息的；
+，client 调用定义在server 的 该 Annotation 标注的方法，它就会返回结果，不过经过代理。
+
+
+## 用法
+
+1.在声明@Controller的类中使用
+2.@SubscribeMapping中写完整的地址()
+3.可以返回数据给客户端
+
+## 示例
+
+```
+@Controller
+
+@SubscribeMapping("/topic/topicmodel")
+public Message handleSubscription1() {
+    return new Message("订阅事件");
+}
+
+```
+
+
+
+
 # 接收
 
 
-## 1）借助 @MessageMapping 注解能够 在 控制器中处理 STOMP 消息
+## @MessageMapping
 
-A1）@MessageMapping注解：表示 handleShout()方法能够处理 指定目的地上到达的消息；
-A2）这个目的地（消息发送目的地url）就是 "/server/app/hello"，其中 "/app" 是 隐含的 ,"/server" 是 springmvc 项目名称；
+   当收到STOMP普通消息的时候，@MessageMapping标记的方法将会触发
 
-## 消息转换
+### 用法
 
-2）因为我们现在处理的 不是 HTTP，所以无法使用 spring 的 HttpMessageConverter 实现 将负载转换为Shout 对象。Spring 4.0 提供了几个消息转换器如下：（Attention， 如果是传输json数据的话，定要添加 Jackson jar 包到你的springmvc 项目中，不然连接不会成功的）
+1.在声明@Controller的类中使用
+2.@MessageMapping中写完整的地址
+3.可以获取客户端发来的数据
 
+
+### 示例
+
+```
+@Controller
+
+@MessageMapping("/topic/welcome")
+public void handleMessage1(Message msg){
+    System.out.println("客户端发消息到---/topic/topicmodel---"+msg);
+}
+
+```
+
+
+
+### 消息转换
+
+2）因为我们现在处理的 不是 HTTP，所以无法使用 spring 的 HttpMessageConverter 实现 将负载转换为Shout 对象。
+Spring 4.0 提供了几个消息转换器如下：（Attention， 如果是传输json数据的话，定要添加 Jackson jar 包到你的springmvc 项目中，不然连接不会成功的）
 
 
 
 # 发送
 
-## 发送消息 @SendTo
+## @SendTo
 
 如果你想要在接收消息的时候，在响应中发送一条消息，修改方法签名 不是void 类型即可，
 消息将会发布到 /topic/greetings， 所有订阅这个主题的应用都会收到这条消息
 
 ```
-@MessageMapping("/hello")  
-    @SendTo("/topic/greetings") //highlight line.  
-    public Greeting greeting(HelloMessage message) throws Exception {  
-        System.out.println("receiving " + message.getName());  
-        System.out.println("connecting successfully.");  
-        return new Greeting("Hello, " + message.getName() + "!");  
-    }  
+@MessageMapping("/topic/welcome")
+@SendTo("/topic/topicmodel")
+public Message handleMessage1(Message msg){
+    System.out.println("客户端发消息到---/topic/topicmodel---"+msg);
+    return new Message("服务器通过SendTo发给/topic/topicmodel的消息");
+}
 
 ```
 
@@ -40,22 +91,7 @@ A2）这个目的地（消息发送目的地url）就是 "/server/app/hello"，�
 对以上代码的分析（Analysis）：消息将会发布到 /topic/hello， 所有订阅这个主题的应用都会收到这条消息；
 
 
-##  @SubscribeMapping注解
-   
-   当收到 STOMP 订阅消息的时候，带有 @SubscribeMapping 注解 的方法将会触发；
-   其也是通过 AnnotationMethodMessageHandler 来接收消息的；
-这个SubscribeMapping annotation标记的方法，是在订阅的时候调用的，也就是说，基本是只执行一次的方法
-，client 调用定义在server 的 该 Annotation 标注的方法，它就会返回结果，不过经过代理。
 
-```
-  @SubscribeMapping("/macro") // defined in Controller. attention for addr '/macro' in server.  
-    public Greeting handleSubscription() {  
-        System.out.println("this is the @SubscribeMapping('/marco')");  
-        Greeting greeting = new Greeting("i am a msg from SubscribeMapping('/macro').");  
-        return greeting;  
-    }  
-
-```
 
 ## SimpMessagingTemplate 
 

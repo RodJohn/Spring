@@ -21,19 +21,28 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 }  
 ```
 
+## 
 
 @EnableWebSocketMessageBroker 注解的作用： 能够在 WebSocket 上启用 STOMP）
 spring 的消息功能是基于消息代理构建的
 
+## registerStompEndpoints
 
 它重载了 registerStompEndpoints() 方法：
 将 "/hello" 路径 注册为 STOMP 端点。这个路径与之前发送和接收消息的目的路径有所不同， 
 这是一个端点，客户端在订阅或发布消息 到目的地址前，要连接该端点，
 即 用户发送请求 url='/server/hello' 与 STOMP server 进行连接，之后再转发到 订阅url；（server== name of your springmvc project ）
 
+## configureMessageBroker
+
+
+默认情况下
+    会自动配置一个简单的内存消息代理，用来处理 "/topic" 为前缀的消息
+    相当于
+
 
 重载了 configureMessageBroker() 方法：配置了一个 简单的消息代理。
-如果不重载，默认case下，会自动配置一个简单的 内存消息代理，用来处理 "/topic" 为前缀的消息。
+如果不重载，默认case下，。
 但经过重载后，消息代理将会处理前缀为 "/topic" and "/queue" 消息。
 
 
