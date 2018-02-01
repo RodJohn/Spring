@@ -13,11 +13,21 @@
         <button id="disconnect" disabled="disabled" onclick="disconnect();">断开连接</button>
     </div>
     <div id="conversationDiv">
-        <label>输入你的名字</label><input type="text" id="name" />
-        <button id="sendName" onclick="sendName();">发送</button><br/>
+        <label>输入你的名字</label><input type="text" id="name11" />
+        <button  onclick="sendName('/app1/welcome','name11');">发送app1/welcome</button><br/>
+        <label>输入你的名字</label><input type="text" id="name12" />
+        <button  onclick="sendName('/app2/welcome','name12');">发送app2/welcome</button><br/>
+        <label>输入你的名字</label><input type="text" id="name31" />
+        <button  onclick="sendName('/topic1/welcome','name31');">发送topic1/welcome</button><br/>
+        <label>输入你的名字</label><input type="text" id="name32" />
+        <button  onclick="sendName('/topic2/welcome','name32');">发送topic2/welcome</button><br/>
+
+
         <label>输入你的名字</label><input type="text" id="name1" />
-        <button id="sendName1" onclick="sendName1();">发送</button>
-        <p id="response"> 返回的数据</p>
+        <button id="sendName1" onclick="sendName1();">发送到topic</button>
+        <p id="response1"> topic1/welcome的数据</p><br/>
+        <p id="response2"> topic2/welcome的数据</p><br/>
+
     </div>
 </div>
 
@@ -40,8 +50,11 @@
         stompClient.connect({}, function(frame) {//链接Web Socket的服务端。
             setConnected(true);
             //同步
-            stompClient.subscribe('/topic/topicmodel7777', function(respnose){
-                showResponse(JSON.parse(respnose.body).name);
+            stompClient.subscribe('/topic1/welcome', function(respnose){
+                showResponse('response1',JSON.parse(respnose.body).name);
+            });
+            stompClient.subscribe('/topic2/welcome', function(respnose){
+                showResponse('response2',JSON.parse(respnose.body).name);
             });
 
         });
@@ -57,19 +70,20 @@
         console.log("Disconnected");
     }
 
-    function sendName() {
-        var name = $('#name').val();
-   		//通过stompClient.send 向/welcome 目标 发送消息,这个是在控制器的@messageMapping 中定义的。
-        stompClient.send("/topic/welcome", {}, JSON.stringify({ 'name': name }));
+    function sendName(path,id) {
+        var name = $('#'+id).val();
+        stompClient.send(path, {}, JSON.stringify({ 'name': name }));
     }
+
+
     function sendName1() {
         var name = $('#name1').val();
    		//通过stompClient.send 向/welcome 目标 发送消息,这个是在控制器的@messageMapping 中定义的。
-        stompClient.send("/topic/topicmodel7777", {}, JSON.stringify({ 'name': name }));
+        stompClient.send("/topic/welcome", {}, JSON.stringify({ 'name': name }));
     }
 
-    function showResponse(message) {
-          var response = $("#response");
+    function showResponse(id,message) {
+          var response = $("#"+id);
           response.html(message);
     }
 </script>

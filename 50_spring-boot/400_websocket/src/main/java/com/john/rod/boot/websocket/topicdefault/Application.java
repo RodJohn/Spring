@@ -57,6 +57,13 @@ public class Application {
     @MessageMapping("/topic/welcome")
     @SendTo("/topic/topicmodel")
     public Message handleMessage1(Message msg){
+        System.out.println("客户端发消息到---/topic/welcome---"+msg);
+        return new Message("服务器通过SendTo发给/topic/topicmodel的消息");
+    }
+
+    @MessageMapping("/topic/topicmodel")
+    @SendTo
+    public Message handleMessage12(Message msg){
         System.out.println("客户端发消息到---/topic/topicmodel---"+msg);
         return new Message("服务器通过SendTo发给/topic/topicmodel的消息");
     }

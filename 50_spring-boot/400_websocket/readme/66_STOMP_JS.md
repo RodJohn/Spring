@@ -1,13 +1,24 @@
+要从浏览器进行连接，对于SockJS，您可以使用 sockjs-client。对于STOMP，许多应用程序都使用了功能完备的jmesnil / stomp-websocket库（也称为stomp.js），已经在生产中使用了多年，但不再进行维护。
+目前， JSteunou / webstomp-client是该库最活跃，最新的继承者，下面的示例代码是基于它：
+
+
+建立连接
+
+var socket = new SockJS('/endpointWisely'); 
+var stompClient = Stomp.over(socket);
+stompClient.connect({}, function(frame) {}
+
+连接SockJS的endpoint是“endpointWisely”，与后台代码中注册的endpoint要一样。
 
 
 
 
 ```
 
-var socket = new SockJS('/endpointWisely'); //1
-连接SockJS的endpoint是“endpointWisely”，与后台代码中注册的endpoint要一样。
+//1
 
-stompClient = Stomp.over(socket);//2
+
+
 创建STOMP协议的webSocket客户端。
 
 

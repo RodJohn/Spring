@@ -1,6 +1,7 @@
 package com.john.rod.boot.websocket.topic;
 
 import com.john.rod.boot.websocket.Message;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.stereotype.Component;
@@ -32,6 +34,7 @@ import static org.springframework.boot.SpringApplication.run;
 @Import({Application.WebMvcConfig.class,Application.WebSocketMessageBrokerConfig.class})
 public class Application  {
 
+    @Autowired SimpMessagingTemplate messagingTemplate;
 
     public static void main(String[] args) {
         ConfigurableApplicationContext run = run(Application.class, args);
@@ -42,7 +45,7 @@ public class Application  {
     public class WebMvcConfig extends WebMvcConfigurerAdapter{
         @Override
         public void addViewControllers(ViewControllerRegistry registry) {
-            registry.addViewController("index").setViewName("myindex");
+            registry.addViewController("index").setViewName("myindextopic");
         }
     }
 
@@ -54,28 +57,29 @@ public class Application  {
         }
         @Override
         public void configureMessageBroker(MessageBrokerRegistry registry) {
-            registry.enableSimpleBroker("/topic");
+            registry.enableSimpleBroker("/topic1","/topic2");
+            registry.setApplicationDestinationPrefixes("/app1","/app2");
         }
     }
 
 
-    @SubscribeMapping("/topicmodel")
-    public Message handleSubscription() {
-        return new Message("订阅事件--");
-    }
-    @SubscribeMapping("/topic/topicmodel")
-    public Message handleSubscription1() {
-        return new Message("订阅事件--1");
-    }
+//    @MessageMapping("/welcome")
+//    @SendTo("/topic1/welcome")
+//    public Message handleMessage(Message msg){
+//        System.out.println(msg);
+//        return msg;
+//    }
 
     @MessageMapping("/welcome")
     public void handleMessage(Message msg){
-        System.out.println(msg);
-    }
-    @MessageMapping("/topic/welcome")
-    public void handleMessage1(Message msg){
-        System.out.println(msg);
+        messagingTemplate.convertAndSend("/topic1/welcome",msg);
     }
 
+
+
+    @SubscribeMapping("/topic1/welcome")
+    public Message handleSubscription1() {
+        return new Message("订阅事件--/topic1/welcome");
+    }
 
 }
