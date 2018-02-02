@@ -25,7 +25,7 @@ SimpMessagingTemplate还提供了 convertAndSendToUser() 方法，该方法能�
 
 
 
-
+java.security.Principal 方法参数反映用户在WebSocket HTTP握手时登录。
 
 ## 客户端
 

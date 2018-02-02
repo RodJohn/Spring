@@ -27,6 +27,8 @@
         <button id="sendName1" onclick="sendName1();">发送到topic</button>
         <p id="response1"> topic1/welcome的数据</p><br/>
         <p id="response2"> topic2/welcome的数据</p><br/>
+        <p id="response4"> topic/welcome的数据</p><br/>
+        <p id="response3"> app1/welcome的数据</p><br/>
 
     </div>
 </div>
@@ -56,6 +58,12 @@
             stompClient.subscribe('/topic2/welcome', function(respnose){
                 showResponse('response2',JSON.parse(respnose.body).name);
             });
+            stompClient.subscribe('/app1/welcome', function(respnose){
+                showResponse('response3',JSON.parse(respnose.body).name);
+            });
+            stompClient.subscribe('/topic/welcome', function(respnose){
+                showResponse('response4',JSON.parse(respnose.body).name);
+            });
 
         });
 
@@ -84,7 +92,8 @@
 
     function showResponse(id,message) {
           var response = $("#"+id);
-          response.html(message);
+          var old = response.html();
+          response.html(old +"---"+message);
     }
 </script>
 </body>

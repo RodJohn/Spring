@@ -8,8 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.handler.annotation.*;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -26,6 +25,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
 import java.security.Principal;
+import java.util.Map;
 
 import static org.springframework.boot.SpringApplication.run;
 
@@ -57,23 +57,22 @@ public class Application  {
         }
         @Override
         public void configureMessageBroker(MessageBrokerRegistry registry) {
-            registry.enableSimpleBroker("/topic1","/topic2");
+//            registry.enableSimpleBroker("/topic");
             registry.setApplicationDestinationPrefixes("/app1","/app2");
         }
     }
 
 
-//    @MessageMapping("/welcome")
-//    @SendTo("/topic1/welcome")
-//    public Message handleMessage(Message msg){
-//        System.out.println(msg);
-//        return msg;
-//    }
-
     @MessageMapping("/welcome")
-    public void handleMessage(Message msg){
-        messagingTemplate.convertAndSend("/topic1/welcome",msg);
+//    @SendTo("/topic1/welcome")
+    public Message handleMessage(@Payload Message msg , @Headers Map  param){
+        return msg;
     }
+
+//    @MessageMapping("/welcome")
+//    public void handleMessage(Message msg){
+//        messagingTemplate.convertAndSend("/topic1/welcome",msg);
+//    }
 
 
 
