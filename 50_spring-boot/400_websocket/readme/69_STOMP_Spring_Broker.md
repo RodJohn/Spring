@@ -1,12 +1,25 @@
 
+# 消息传播流程
+
 ![这里写图片描述](https://docs.spring.io/spring/docs/current/spring-framework-reference/images/message-flow-broker-relay.png?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcm9kX2pvaG4=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
 
+# 使用内置STOMP服务
+
+enableSimpleBroker默认情况下使用启用的是spring内置的STOMP功能
+这仅支持STOMP命令的一个子集（例如，没有Ack，收据等），
+依赖于简单的消息发送循环，并且不适合集群。
+作为替代，应用程序可以升级到使用全功能的消息代理。
+
+# 使用外部STOMP服务器
 
 
-简单的代理非常适合入门，但是仅支持STOMP命令的一个子集（例如，没有Ack，收据等），依赖于简单的消息发送循环，并且不适合集群。作为替代，应用程序可以升级到使用全功能的消息代理。
 
-检查您选择的消息代理（例如RabbitMQ， ActiveMQ等）的STOMP文档 ，安装代理，并在启用STOMP支持的情况下运行它。然后在Spring配置中启用STOMP代理中继，而不是简单的代理。
+
+
+
+检查您选择的消息代理（例如RabbitMQ， ActiveMQ等）的STOMP文档 ，安装代理，并在启用STOMP支持的情况下运行它。
+然后在Spring配置中启用STOMP代理中继，而不是简单的代理。
 
 
 

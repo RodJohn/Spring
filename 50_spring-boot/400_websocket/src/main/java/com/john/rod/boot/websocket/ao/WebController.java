@@ -4,6 +4,8 @@ import com.john.rod.boot.websocket.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 
@@ -20,4 +22,11 @@ public class WebController {
     public void handleMessage(Message msg){
         System.out.println(msg);
     }
+
+    @RequestMapping("/data")
+    @ResponseBody
+    public String handleMessage1(){
+        return "msg";
+    }
+
 }

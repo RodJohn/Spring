@@ -33,10 +33,21 @@
     </div>
 </div>
 
-<script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/sockjs-client/sockjs.min.js"></script>
-<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script src="jquery.js"></script>
+<script src="sockjs.min.js"></script>
+<script src="stomp.min.js"></script>
 <script type="text/javascript">
+
+    var ws = new WebSocket('ws://localhost:15674/ws');
+    var client = Stomp.over(ws);
+    var on_connect = function() {
+        console.log('connected');
+    };
+    var on_error =   function() {
+        console.log('error');
+    };
+    client.connect('guest','guest',on_connect,on_error,'/');
+
     var stompClient = null;
 
     function setConnected(connected) {
@@ -47,7 +58,7 @@
     }
 	
     function connect() {
-        var socket = new SockJS('http://127.0.0.1:15674/ws'); //链接SockJS 的endpoint 名称为"/endpointWisely"
+        var socket = new SockJS('http://127.0.0.1:15674/ws');
         stompClient = Stomp.over(socket);//使用stomp子协议的WebSocket 客户端
         stompClient.connect({}, function(frame) {//链接Web Socket的服务端。
             setConnected(true);
