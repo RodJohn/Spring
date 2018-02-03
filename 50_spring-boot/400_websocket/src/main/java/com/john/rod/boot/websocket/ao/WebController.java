@@ -4,6 +4,7 @@ import com.john.rod.boot.websocket.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,6 +24,7 @@ public class WebController {
         System.out.println(msg);
     }
 
+//    @CrossOrigin
     @RequestMapping("/data")
     @ResponseBody
     public String handleMessage1(){
