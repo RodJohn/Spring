@@ -11,14 +11,19 @@ enableSimpleBroker默认情况下使用启用的是spring内置的STOMP功能
 依赖于简单的消息发送循环，并且不适合集群。
 作为替代，应用程序可以升级到使用全功能的消息代理。
 
+
+
 # 使用外部STOMP服务器
 
 
 
+## 服务器
 
 
+检查您选择的消息代理（例如RabbitMQ， ActiveMQ等）的STOMP文档 ，安装代理，并在启用STOMP支持的情况下运行它。STOMP
 
-检查您选择的消息代理（例如RabbitMQ， ActiveMQ等）的STOMP文档 ，安装代理，并在启用STOMP支持的情况下运行它。
+
+## 
 然后在Spring配置中启用STOMP代理中继，而不是简单的代理。
 
 
@@ -78,3 +83,6 @@ registry.setApplicationDestinationPrefixes("/app", "/foo");
 } // setXXX()方法 是可选的  
 ```
 
+# 问题
+
+https://github.com/spring-projects/spring-boot/issues/3459

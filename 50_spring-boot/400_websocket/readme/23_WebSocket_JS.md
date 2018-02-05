@@ -155,6 +155,24 @@ ws.onmessage = function(e) {
 };
 ```
 
+# 示例
+
+```
+    var webSocket = new WebSocket("ws://192.168.203.122:15674/ws");
+
+    webSocket.addEventListener("message", function(event) {
+        console.log("接收到消息");
+        var data = event.data;
+        console.log(data);
+    });
+
+    webSocket.addEventListener("open", function(event) {
+        console.log("  连接已经建立 ");
+        webSocket.send("hhahah");
+    });
+
+```
+
 
 
 # 案例
