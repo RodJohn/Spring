@@ -24,7 +24,7 @@ import static org.springframework.boot.SpringApplication.run;
 
 @SpringBootApplication
 @Controller
-@Import({Application.WebMvcConfig.class, Application.WebSocketMessageBrokerConfig.class})
+@Import({ Application.WebSocketMessageBrokerConfig.class})
 public class Application {
 
     @Autowired SimpMessagingTemplate messagingTemplate;
@@ -34,14 +34,6 @@ public class Application {
     }
 
 
-
-    public class WebMvcConfig extends WebMvcConfigurerAdapter{
-        @Override
-        public void addViewControllers(ViewControllerRegistry registry) {
-            registry.addViewController("index").setViewName("myindextopic");
-        }
-    }
-
     @EnableWebSocketMessageBroker
     public class WebSocketMessageBrokerConfig extends AbstractWebSocketMessageBrokerConfigurer {
         @Override
@@ -50,18 +42,21 @@ public class Application {
         }
         @Override
         public void configureMessageBroker(MessageBrokerRegistry registry) {
-            registry.enableStompBrokerRelay("/topic", "/queue")
+            registry.enableStompBrokerRelay("/topic")
                     .setRelayHost("127.0.0.1")
                     .setRelayPort(61613)
+                    .setVirtualHost("/")
                     .setClientLogin("admin")
-                    .setClientPasscode("admin");
+                    .setClientPasscode("admin")
+                    .setSystemLogin("admin")
+                    .setSystemPasscode("admin");
             registry.setApplicationDestinationPrefixes("/app1","/app2");
         }
     }
 
 
     @MessageMapping("/welcome")
-//    @SendTo("/topic1/welcome")
+//    @SendTo("/topic/welcome")
     public Message handleMessage(@Payload Message msg , @Headers Map  param){
         return msg;
     }
@@ -73,7 +68,7 @@ public class Application {
 
 
 
-    @SubscribeMapping("/topic1/welcome")
+    @SubscribeMapping("/topic/welcome")
     public Message handleSubscription1() {
         return new Message("订阅事件--/topic1/welcome");
     }

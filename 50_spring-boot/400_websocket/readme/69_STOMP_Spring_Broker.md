@@ -1,7 +1,11 @@
 
 # 消息传播流程
 
+
 ![这里写图片描述](https://docs.spring.io/spring/docs/current/spring-framework-reference/images/message-flow-broker-relay.png?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcm9kX2pvaG4=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+可以进入自定义的代理管道
+也可以直接进入代理服务器
 
 
 # 使用内置STOMP服务
@@ -14,7 +18,6 @@ enableSimpleBroker默认情况下使用启用的是spring内置的STOMP功能
 
 
 # 使用外部STOMP服务器
-
 
 
 ## 服务器
@@ -82,6 +85,11 @@ registry.enableStompBrokerRelay("/topic", "/queue")
 registry.setApplicationDestinationPrefixes("/app", "/foo");  
 } // setXXX()方法 是可选的  
 ```
+
+
+# 注意rabbitmq 的特点
+
+destination
 
 # 问题
 

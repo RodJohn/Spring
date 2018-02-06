@@ -18,14 +18,14 @@
         <label>输入你的名字</label><input type="text" id="name12" />
         <button  onclick="sendName('/app2/welcome','name12');">发送app2/welcome</button><br/>
         <label>输入你的名字</label><input type="text" id="name31" />
-        <button  onclick="sendName('/topic1/welcome','name31');">发送topic1/welcome</button><br/>
+        <button  onclick="sendName('/topic/welcome','name31');">发送topic1/welcome</button><br/>
         <label>输入你的名字</label><input type="text" id="name32" />
         <button  onclick="sendName('/topic2/welcome','name32');">发送topic2/welcome</button><br/>
 
 
         <label>输入你的名字</label><input type="text" id="name1" />
         <button id="sendName1" onclick="sendName1();">发送到topic</button>
-        <p id="response1"> topic1/welcome的数据</p><br/>
+        <p id="response1"> topic/welcome的数据</p><br/>
         <p id="response2"> topic2/welcome的数据</p><br/>
         <p id="response4"> topic/welcome的数据</p><br/>
         <p id="response3"> app1/welcome的数据</p><br/>
@@ -48,15 +48,15 @@
     }
 	
     function connect() {
-        var socket = new SockJS('http://127.0.0.1:15670/stomp');
+        var socket = new SockJS('http://127.0.0.1:9000/chathost');
         stompClient = Stomp.over(socket);//使用stomp子协议的WebSocket 客户端
-        stompClient.connect({}, function(frame) {//链接Web Socket的服务端。
+        stompClient.connect('admin','admin', function(frame) {
             setConnected(true);
             //同步
-            stompClient.subscribe('/topic1/welcome', function(respnose){
+            stompClient.subscribe('/topic/welcome', function(respnose){
                 showResponse('response1',JSON.parse(respnose.body).name);
             });
-            stompClient.subscribe('/topic2/welcome', function(respnose){
+            stompClient.subscribe('/topic/welcome', function(respnose){
                 showResponse('response2',JSON.parse(respnose.body).name);
             });
             stompClient.subscribe('/app1/welcome', function(respnose){
