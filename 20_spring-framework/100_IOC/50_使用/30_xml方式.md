@@ -92,6 +92,11 @@ p名称空间
   5、global session：基于portlet的web中有效（portlet定义了global sessio），如果在web中，同session
 
 
+Singleton适用于无状态的bean，即没有状态的bean。比如一个service，DAO或者controller。他们都没有自己的状态(举个简单的例子，一个函数sin(x)，这个函数本身就是无状态的，所以我们现在喜欢的函数式编程也遵循这个理念)。而是根据传输的参数执行一些操作(作为HTTP请求参数)。
+
+
+
+
 # 方法注入 
 
 ## lookup
