@@ -6,4 +6,6 @@ findProject(':20_spring-framework:100_IOC:demo')?.name = 'demo'
 
 include '50_spring-boot:400_websocket'
 findProject(':50_spring-boot:400_websocket')?.name = 'boot_websocket'
+include '50_spring-boot:410_swagger'
+findProject(':50_spring-boot:410_swagger')?.name = 'boot-swagger'
 
