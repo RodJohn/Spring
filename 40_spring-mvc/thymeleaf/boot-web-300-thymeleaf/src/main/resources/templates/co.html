@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+<title>主页</title>
+</head>
+<body>
+
+	<h1>标签协同</h1>
+	
+	
+	<table  >
+		<tr th:remove="all-but-first"  >
+			<td th:text="${data}"> </td>
+			<td > 表格2</td>
+			<td > 表格3</td>
+		</tr>
+	</table>
+	
+	<div th:replace="/foot">
+		  include("/foot.html")
+	</div>
+	
+</body>
+</html>

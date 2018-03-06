@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+<title>主页</title>
+</head>
+<body>
+	<h1>标签测试</h1>
+	
+	<h4 th:id="123">123</h4>
+	
+	<h4 th:text="123"></h4>
+	<!-- <h4 th:utext="welcome to our <b>delicious</b>restaurant"></h4> -->
+	
+	<a th:href="@{logout}">a</a>
+	<a th:href="@{/logout}">a</a>
+	<a th:href="@{//logout}">a</a>
+	<a th:href="@{~/logout}">a</a>
+	
+	<img src="http://apiv2.linklaws.com/upload/user/new/1500832586194.png" th:src="${src}"/>
+	
+	
+	<input th:value="123" />
+	
+	
+	<h2 th:text="逻辑"></h2>
+	
+	<h3 th:if="1==1" >1==1</h3>
+	<h3 th:if="1!=1" >1!=1</h3>
+	
+	<h3 th:class="red" >class</h3>
+	<h3 th:class="red"  th:classappend="green" >class</h3>
+	
+	
+	<div th:switch="1">
+	  <p th:case="1">1</p>
+	  <p th:case="2">2</p>
+	  <p th:case="*">其他</p>
+	</div>
+	<div th:switch="8">
+	  <p th:case="1">1</p>
+	  <p th:case="2">2</p>
+	  <p th:case="*">其他</p>
+	</div>
+	
+	<table>
+		<tr>
+			<td th:each="one,index:${list}"  th:text="${index.index+1+' '+one}"/>
+		</tr>
+	</table>
+	
+	
+	
+</body>
+</html>

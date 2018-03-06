@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+<title>主页</title>
+</head>
+<body>
+	<h1>data</h1>
+	
+	
+
+	<h3 th:text="${string1}?:'默认值'" ></h3>
+	<h3 th:text="${user.name}" ></h3>
+	<div th:object = "${user}">
+		<span th:text="*{name}"/>
+	</div>
+
+
+	
+	
+</body>
+</html>
